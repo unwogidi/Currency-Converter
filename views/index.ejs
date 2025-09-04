@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Currency Converter</title>
+    <!-- Link external CSS file -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="converter">
+      <!-- Main Title -->
+      <h2 class="title">GeoStanics Currency Calculator</h2>
+
+      <!-- Conversion form (POSTs to /convert) -->
+      <form action="/convert" method="POST">
+        <div class="converter-box">
+          <!-- ================= LEFT CURRENCY (Base) ================= -->
+          <div class="currency-block">
+            <div class="currency-select">
+              <!-- Flag image for base currency -->
+              <!-- Uses either the selected base_code or defaults to the first currency -->
+              <img
+                id="from-flag"
+                src="<%= currencies.find(c => c.currencyCode === (data.base_code || currencies[0].currencyCode)).icon %>"
+                alt="flag"
+                class="flag"
+              />
+
+              <!-- Dropdown list of available currencies -->
+              <select name="fromCurrency" id="fromCurrency">
+                <% currencies.forEach(item => { %> <% if (item.countryName !==
+                "Global") { %>
+                <option
+                  value="<%= item.currencyCode %>"
+                  data-icon="<%= item.icon %>"
+                  <!--
+                  Pre-select
+                  previously
+                  chosen
+                  currency
+                  --
+                >
+                  <%= data.base_code === item.currencyCode ? "selected" : "" %>>
+                  <%= item.currencyCode %> - <%= item.currencyName %>
+                </option>
+                <% } %> <% }); %>
+              </select>
+            </div>
+
+            <!-- Input amount (defaults to 1 or last input) -->
+            <input
+              type="number"
+              name="fromAmount"
+              value="<%= data.amount || 1 %>"
+              class="amount"
+            />
+          </div>
+
+          <!-- SWAP ICON (just visual, no functionality yet) -->
+          <div class="swap">
+            <span>⇆</span>
+          </div>
+
+          <!-- ================= RIGHT CURRENCY (Target) ================= -->
+          <div class="currency-block">
+            <div class="currency-select">
+              <!-- Flag image for target currency -->
+              <!-- Uses either the selected target_code or defaults to the first currency -->
+              <img
+                id="to-flag"
+                src="<%= currencies.find(c => c.currencyCode === (data.target_code || currencies[0].currencyCode)).icon %>"
+                alt="flag"
+                class="flag"
+              />
+
+              <!-- Dropdown list of target currencies -->
+              <select name="toCurrency" id="toCurrency">
+                <% currencies.forEach(item => { %> <% if (item.countryName !==
+                "Global") { %>
+                <option
+                  value="<%= item.currencyCode %>"
+                  data-icon="<%= item.icon %>"
+                  <!--
+                  Pre-select
+                  previously
+                  chosen
+                  target
+                  currency
+                  --
+                >
+                  <%= data.target_code === item.currencyCode ? "selected" : ""
+                  %>> <%= item.currencyCode %> - <%= item.currencyName %>
+                </option>
+                <% } %> <% }); %>
+              </select>
+            </div>
+
+            <!-- Converted result (read-only) -->
+            <input
+              type="number"
+              name="toAmount"
+              value="<%= data.conversion_result || 0 %>"
+              class="amount"
+              readonly
+            />
+          </div>
+        </div>
+
+        <!-- ================= OPTIONS (Date + Convert button) ================= -->
+        <div class="options">
+          <label>
+            Date:
+            <!-- Example date binding (can be enhanced with API data) -->
+            <input
+              type="date"
+              name="date"
+              value="<%= currencies[0].availableUntil %>"
+            />
+          </label>
+
+          <!-- Submit button -->
+          <button type="submit" name="convert" class="convert-btn">
+            Convert
+          </button>
+        </div>
+      </form>
+
+      <!-- ================= FOOTER ================= -->
+      <div class="footer">
+        <p>
+          GeoStanics's currency calculator tools use GeoStanics Rates™, the
+          touchstone FX rates compiled from leading market data contributors.
+        </p>
+      </div>
+    </div>
+
+    <!-- ================= SCRIPT ================= -->
+    <script>
+      // Grab elements for flags and dropdowns
+      const fromCurrency = document.getElementById("fromCurrency");
+      const fromFlag = document.getElementById("from-flag");
+      const toCurrency = document.getElementById("toCurrency");
+      const toFlag = document.getElementById("to-flag");
+
+      // Update left flag when base currency changes
+      fromCurrency.addEventListener("change", function () {
+        const selectedOption = fromCurrency.options[fromCurrency.selectedIndex];
+        fromFlag.src = selectedOption.getAttribute("data-icon");
+      });
+
+      // Update right flag when target currency changes
+      toCurrency.addEventListener("change", function () {
+        const selectedOption = toCurrency.options[toCurrency.selectedIndex];
+        toFlag.src = selectedOption.getAttribute("data-icon");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,153 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa, #e9eff5);
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  margin: 0;
+}
+
+.converter {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 850px;
+  width: 100%;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  font-size: 22px;
+  margin-bottom: 25px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+.converter-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.currency-block {
+  flex: 1;
+  background: #fafafa;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.currency-select {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  height: 45px;
+}
+
+.flag {
+  width: 25px;
+  height: 18px;
+  border-radius: 3px;
+  object-fit: cover;
+  /* border: 1px solid #ddd; */
+}
+
+.currency-select select {
+  border: none;
+  font-size: 14px;
+  background: transparent;
+  outline: none;
+  flex: 1;
+  height: 100%;
+}
+
+.amount {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  height: 45px;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.swap {
+  font-size: 26px;
+  color: #27ae60;
+}
+
+.options {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 14px;
+}
+
+.options label {
+  font-weight: bold;
+  color: #555;
+}
+
+.options input[type="date"] {
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.convert-btn {
+  padding: 10px 20px;
+  background: #27ae60;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.convert-btn:hover {
+  background: #219150;
+  transform: translateY(-2px);
+}
+
+.footer {
+  margin-top: 25px;
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .converter-box {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .options {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .convert-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
