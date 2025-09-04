@@ -7,7 +7,7 @@ const port = 3000;
 
 // ExchangeRate API configuration
 const API_URL = "https://v6.exchangerate-api.com/v6/";
-const API_KEY = "d26a07c07f2ea339f571a8b0";
+const API_KEY = "";
 
 // Serve static files (CSS, JS, images) from "public" folder
 app.use(express.static("public"));
